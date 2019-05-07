@@ -1,0 +1,30 @@
+FROM microsoft/aspnetcore:1.0
+WORKDIR /app
+EXPOSE 80
+
+FROM microsoft/aspnetcore-build:1.0
+
+COPY ["/MyHealth.Web/MyHealth.Web.csproj", "/MyHealth.Web/"]
+COPY ["/MyHealth.API/MyHealth.API.csproj", "/MyHealth.API/"]
+COPY ["/MyHealth.Data/MyHealth.Data.csproj", "/MyHealth.Data/"]
+COPY ["/MyHealth.Model/MyHealth.Model.csproj", "/MyHealth.Model/"]
+RUN dotnet restore "/MyHealth.Web/MyHealth.Web.csproj"
+COPY . .
+RUN pwd
+WORKDIR /MyHealth.Web/
+RUN dotnet build "/MyHealth.Web/MyHealth.Web.csproj" -c Release -o /app
+RUN dotnet publish "/MyHealth.Web/MyHealth.Web.csproj" -c Release -o /publish/
+
+#FROM  microsoft/aspnetcore-build:1.0
+#RUN pwd
+#WORKDIR /MyHealth.Web/
+
+#RUN dotnet publish "/MyHealth.Web/MyHealth.Web.csproj" -c Release -o /app
+
+#FROM base AS final
+#RUN pwd
+WORKDIR /publish
+RUN pwd
+#COPY /MyHealth.Web/publish .
+ENTRYPOINT ["dotnet", "MyHealth.Web.dll"]
+

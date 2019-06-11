@@ -1,0 +1,74 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: myhealthbackened-deployment 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: myhealthbackened-deployment
+    spec:
+      containers:
+      - name: myhealthbackened-deployment
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myhealthbackened-service
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: myhealthbackened-service
+
+---
+
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2 
+kind: Deployment 
+metadata: 
+  name: myhealthfrontend-deployment 
+  #namespace: my-namespace
+spec: 
+  selector: 
+    matchLabels: 
+      app: myhealth 
+  replicas: 1 # tells deployment to run 2 pods matching the template 
+  template:
+    metadata: 
+      labels: 
+        app: myhealth 
+    spec: 
+      containers: 
+      - name: myhealth 
+        image: myhealthappacr.azurecr.io/myhealth:1.6
+        ports: 
+        - containerPort: 80 
+        env:
+        - name: redis
+          value: "myhealthbackened-deployment"
+      imagePullSecrets:
+        - name: myhealthappsecret
+
+---
+
+kind: Service 
+apiVersion: v1 
+metadata: 
+  name: myhealthfrontend-service 
+  #namespace: my-namespace
+spec: 
+  selector: 
+    app: myhealth 
+  ports: 
+  - protocol: TCP 
+    port: 80 
+    targetPort: 80 
+  type: LoadBalancer 
+

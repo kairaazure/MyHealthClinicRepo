@@ -29,7 +29,6 @@ kind: Service
 apiVersion: v1 
 metadata: 
   name: myhealthfrontend-service 
-  #namespace: my-namespace
 spec: 
   selector: 
     app: myhealth 

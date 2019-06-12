@@ -1,35 +1,3 @@
-apiVersion: apps/v1beta1
-kind: Deployment
-metadata:
-  name: myhealthbackened-deployment 
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: myhealthbackened-deployment
-    spec:
-      containers:
-      - name: myhealthbackened-deployment
-        image: redis
-        ports:
-        - containerPort: 6379
-          name: redis
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: myhealthbackened-service
-spec:
-  ports:
-  - port: 6379
-  selector:
-    app: myhealthbackened-service
-
----
-
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2 
 kind: Deployment 
 metadata: 

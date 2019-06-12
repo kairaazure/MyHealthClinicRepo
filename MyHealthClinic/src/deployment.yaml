@@ -21,7 +21,7 @@ spec:
         - name: redis
           value: "myhealthbackened-deployment"
       imagePullSecrets:
-        - name: myhealthappsecret
+        - name: secretdemo
 
 ---
 

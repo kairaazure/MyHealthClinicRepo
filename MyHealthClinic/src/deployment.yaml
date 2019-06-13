@@ -14,16 +14,11 @@ spec:
     spec: 
       containers: 
       - name: myhealth 
-        image: myhealthappacr/myhealthappacr.azurecr.io:latest
+        image: kairaazure/myapp:#{Build.BuildId}#
         #image: Build.Repository.Nam:#{Build.BuildId}#
         ports: 
         - containerPort: 80 
-        env:
-        - name: redis
-          value: "myhealthbackened-deployment"
-      imagePullSecrets:
-        - name: secretkb
-
+       
 ---
 
 kind: Service 

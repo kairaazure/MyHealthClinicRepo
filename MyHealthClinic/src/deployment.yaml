@@ -22,7 +22,7 @@ spec:
         - name: redis
           value: "myhealthbackened-deployment"
       imagePullSecrets:
-        - name: secretd
+        - name: secretkb
 
 ---
 

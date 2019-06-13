@@ -18,7 +18,8 @@ spec:
         #image: Build.Repository.Nam:#{Build.BuildId}#
         ports: 
         - containerPort: 80 
-       
+      imagePullPolicy: Always
+
 ---
 
 kind: Service 

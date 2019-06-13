@@ -13,9 +13,7 @@ spec:
         app: mhppoc 
     spec: 
       containers: 
-      - name: mhppoc 
-        #image: myhealthappacr.azurecr.io/myhealth:1.6 #pulling image from acr static
-        #image: myhealthappacr.azurecr.io/mydevopsapp:314  #pulling image from acr dynamic
+      - name: mhppoc       
         image: myhealthappacr.azurecr.io/mydevopsapp:#{Build.BuildId}#  #pulling image from acr dynamic devops
         ports: 
         - containerPort: 80 

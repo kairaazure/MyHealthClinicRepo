@@ -18,9 +18,7 @@ spec:
         #image: Build.Repository.Nam:#{Build.BuildId}#
         ports: 
         - containerPort: 80 
-       imagePullSecrets:
-        - name: kubesecret  
-
+      
 ---
 
 kind: Service 

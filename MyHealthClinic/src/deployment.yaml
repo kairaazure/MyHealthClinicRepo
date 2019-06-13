@@ -14,7 +14,7 @@ spec:
     spec: 
       containers: 
       - name: myhealth 
-        image: myhealthappacr/myhealthappacr.azurecr.io:#{$(Build.BuildId)}#
+        image: myhealthappacr/myhealthappacr.azurecr.io
         #image: Build.Repository.Nam:#{Build.BuildId}#
         ports: 
         - containerPort: 80 

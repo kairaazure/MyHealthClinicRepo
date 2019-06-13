@@ -20,7 +20,7 @@ spec:
         - containerPort: 80 
      # imagePullPolicy: Always
        imagePullSecrets:
-        - name: secretkb  
+        - name: kubesecret  
 
 ---
 

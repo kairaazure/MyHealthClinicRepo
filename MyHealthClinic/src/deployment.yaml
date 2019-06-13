@@ -1,38 +1,39 @@
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2 
 kind: Deployment 
 metadata: 
-  name: myhealthfrontend-deployment 
+  name: mhppoc-deployment 
 spec: 
   selector: 
     matchLabels: 
-      app: myhealth 
-  replicas: 1 # tells deployment to run 2 pods matching the template 
+      app: mhppoc 
+  replicas: 2 # tells deployment to run 2 pods matching the template 
   template:
     metadata: 
       labels: 
-        app: myhealth 
+        app: mhppoc 
     spec: 
       containers: 
-      - name: myhealth 
-        image: mydevopsapp:#{Build.BuildId}#
-        #image: Build.Repository.Nam:#{Build.BuildId}#
+      - name: mhppoc 
+        #image: myhealthappacr.azurecr.io/myhealth:1.6 #pulling image from acr static
+        #image: myhealthappacr.azurecr.io/mydevopsapp:314  #pulling image from acr dynamic
+        image: myhealthappacr.azurecr.io/mydevopsapp:#{Build.BuildId}#  #pulling image from acr dynamic devops
         ports: 
         - containerPort: 80 
       imagePullSecrets:
-        - name: ksecret
-           
----
-
+        - name: secretdevops 
+--- 
+# https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service  
 kind: Service 
 apiVersion: v1 
 metadata: 
-  name: myhealthfrontend-service 
+  name: mhppoc-service 
 spec: 
   selector: 
-    app: myhealth 
+    app: mhppoc 
   ports: 
   - protocol: TCP 
     port: 80 
     targetPort: 80 
   type: LoadBalancer 
+
 

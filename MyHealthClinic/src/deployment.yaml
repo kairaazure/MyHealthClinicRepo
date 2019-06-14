@@ -14,7 +14,7 @@ spec:
     spec: 
       containers: 
       - name: mhppoc       
-        image: myhealthappacr.azurecr.io/mydevopsapp:#{Build.BuildId}#  #pulling image from acr dynamic devops
+        image: kairaazure/myapp:$(Build.BuildId)  #pulling image from docker dynamic devops
         ports: 
         - containerPort: 80 
       imagePullSecrets:

@@ -17,11 +17,11 @@ spec:
         image: myhealthappacr.azurecr.io/myapp:326  #pulling image from docker dynamic devops
         ports: 
         - containerPort: 80 
-       imagePullSecrets:
-      - name: secretdemo
+      imagePullSecrets:
+        - name: secretdemo
       
 --- 
-# https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service  
+
 kind: Service 
 apiVersion: v1 
 metadata: 
@@ -34,5 +34,3 @@ spec:
     port: 80 
     targetPort: 80 
   type: LoadBalancer 
-
-

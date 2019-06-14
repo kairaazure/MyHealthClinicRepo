@@ -17,6 +17,8 @@ spec:
         image: myhealthappacr.azurecr.io/myapp:#{Build.BuildId}#  #pulling image from docker dynamic devops
         ports: 
         - containerPort: 80 
+       imagePullSecrets:
+      - name: secretdemo
       
 --- 
 # https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service  

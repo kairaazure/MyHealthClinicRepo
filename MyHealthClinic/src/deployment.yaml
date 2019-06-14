@@ -14,11 +14,10 @@ spec:
     spec: 
       containers: 
       - name: mhppoc       
-        image: kairaazure/myapp:#{Build.BuildId}#  #pulling image from docker dynamic devops
+        image: myhealthappacr.azurecr.io/myapp:#{Build.BuildId}#  #pulling image from docker dynamic devops
         ports: 
         - containerPort: 80 
-      imagePullSecrets:
-        - name: secretdevops 
+      
 --- 
 # https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service  
 kind: Service 
